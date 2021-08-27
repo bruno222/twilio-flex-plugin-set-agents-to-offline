@@ -41,17 +41,18 @@ export default class SetAgentsOfflinePlugin extends FlexPlugin {
   }
 
   changeActivityToOffline = () => {
-    const available = this.manager.workerClient.activity.available;
+    const currentSid = this.manager.workerClient.activity.sid;
+    const isOffline = this.offlineSid === currentSid;
 
     // disable timer
-    if (!available && this.intervalId) {
+    if (isOffline && this.intervalId) {
       console.log(`${PLUGIN_NAME} - disabling timer...`);
       clearInterval(this.intervalId);
       this.intervalId = undefined;
     }
 
     // enable timer every minute
-    if (available && !this.intervalId) {
+    if (!isOffline && !this.intervalId) {
       console.log(`${PLUGIN_NAME} - enabling timer...`);
 
       this.intervalId = setInterval(() => {
