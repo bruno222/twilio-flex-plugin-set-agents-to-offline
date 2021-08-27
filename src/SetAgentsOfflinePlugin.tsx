@@ -1,7 +1,6 @@
 import React from 'react';
-import * as Flex from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
-import { Manager } from '@twilio/flex-ui';
+import { Actions, Manager } from '@twilio/flex-ui';
 
 const PLUGIN_NAME = 'SetAgentsOfflinePlugin';
 
@@ -19,17 +18,15 @@ export default class SetAgentsOfflinePlugin extends FlexPlugin {
   constructor() {
     super(PLUGIN_NAME);
   }
-  init(flex: typeof Flex) {
-    const options: Flex.ContentFragmentProps = { sortOrder: -1 };
-
+  init() {
     this.offlineSid = this.findOfflineActivitySid();
 
     this.changeActivityToOffline();
-    Flex.Actions.addListener('afterSetActivity', this.changeActivityToOffline);
+    Actions.addListener('afterSetActivity', this.changeActivityToOffline);
   }
 
   findOfflineActivitySid() {
-    const offlineSids = [...Array.from(this.manager.workerClient.activities.values())].filter((a) => a?.name?.toLowerCase() === 'offline');
+    const offlineSids = Array.from(this.manager.workerClient.activities.values()).filter((a) => a?.name?.toLowerCase() === 'offline');
 
     if (offlineSids.length === 0) {
       throw new Error(
@@ -66,6 +63,6 @@ export default class SetAgentsOfflinePlugin extends FlexPlugin {
 
   goOffline = () => {
     console.log(`${PLUGIN_NAME} - going offline...`);
-    window.Twilio.Flex.Actions.invokeAction('SetActivity', { activitySid: this.offlineSid });
+    Actions.invokeAction('SetActivity', { activitySid: this.offlineSid });
   };
 }
