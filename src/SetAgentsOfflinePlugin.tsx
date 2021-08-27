@@ -64,8 +64,8 @@ export default class SetAgentsOfflinePlugin extends FlexPlugin {
     }
   };
 
-  goOffline = async () => {
+  goOffline = () => {
     console.log(`${PLUGIN_NAME} - going offline...`);
-    await window.Twilio.Flex.Actions.invokeAction('SetActivity', { activitySid: this.offlineSid });
+    window.Twilio.Flex.Actions.invokeAction('SetActivity', { activitySid: this.offlineSid });
   };
 }
