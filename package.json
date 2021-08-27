@@ -1,0 +1,19 @@
+{
+  "name": "plugin-set-agents-offline",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "twilio flex:plugins:start",
+    "postinstall": "flex-plugin pre-script-check"
+  },
+  "dependencies": {
+    "flex-plugin-scripts": "4.9.1-beta.0",
+    "react": "16.5.2",
+    "react-dom": "16.5.2"
+  },
+  "devDependencies": {
+    "@twilio/flex-ui": "^1",
+    "react-test-renderer": "16.5.2",
+    "typescript": "^3"
+  }
+}
