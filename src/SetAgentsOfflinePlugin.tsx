@@ -51,7 +51,7 @@ export default class SetAgentsOfflinePlugin extends FlexPlugin {
       this.intervalId = undefined;
     }
 
-    // enable timer every minute
+    // enable timer
     if (!isOffline && !this.intervalId) {
       console.log(`${PLUGIN_NAME} - enabling timer...`);
 
